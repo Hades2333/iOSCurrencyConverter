@@ -10,6 +10,7 @@
 		62DF11132D50C76700673AE2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11122D50C76700673AE2 /* SnapKit */; };
 		62DF11152D50C76700673AE2 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11142D50C76700673AE2 /* SnapKit-Dynamic */; };
 		62DF11EC2D50D90700673AE2 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11EB2D50D90700673AE2 /* KeychainAccess */; };
+		62DF12082D50F18200673AE2 /* LoggingOSLog in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF12072D50F18200673AE2 /* LoggingOSLog */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,7 @@
 				62DF11132D50C76700673AE2 /* SnapKit in Frameworks */,
 				62DF11152D50C76700673AE2 /* SnapKit-Dynamic in Frameworks */,
 				62DF11EC2D50D90700673AE2 /* KeychainAccess in Frameworks */,
+				62DF12082D50F18200673AE2 /* LoggingOSLog in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +139,7 @@
 				62DF11122D50C76700673AE2 /* SnapKit */,
 				62DF11142D50C76700673AE2 /* SnapKit-Dynamic */,
 				62DF11EB2D50D90700673AE2 /* KeychainAccess */,
+				62DF12072D50F18200673AE2 /* LoggingOSLog */,
 			);
 			productName = CurrencyConverter;
 			productReference = 62690F3F2D4A4623009CD8A4 /* CurrencyConverter.app */;
@@ -223,6 +226,7 @@
 			packageReferences = (
 				62DF110B2D50C32F00673AE2 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				62DF11EA2D50D90700673AE2 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				62DF12062D50F18200673AE2 /* XCRemoteSwiftPackageReference "swift-log-oslog" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 62690F402D4A4623009CD8A4 /* Products */;
@@ -605,6 +609,14 @@
 				kind = branch;
 			};
 		};
+		62DF12062D50F18200673AE2 /* XCRemoteSwiftPackageReference "swift-log-oslog" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/chrisaljoudi/swift-log-oslog";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -622,6 +634,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 62DF11EA2D50D90700673AE2 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		62DF12072D50F18200673AE2 /* LoggingOSLog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62DF12062D50F18200673AE2 /* XCRemoteSwiftPackageReference "swift-log-oslog" */;
+			productName = LoggingOSLog;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
