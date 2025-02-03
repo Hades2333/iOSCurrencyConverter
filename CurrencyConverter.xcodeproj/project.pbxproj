@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		62DF11132D50C76700673AE2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11122D50C76700673AE2 /* SnapKit */; };
+		62DF11152D50C76700673AE2 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11142D50C76700673AE2 /* SnapKit-Dynamic */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		62690F562D4A4624009CD8A4 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -30,7 +35,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		62690F672D4A4624009CD8A4 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */ = {
+		62DF11112D50C73B00673AE2 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				ApplicationLayer/Info.plist,
@@ -43,7 +48,7 @@
 		62690F412D4A4623009CD8A4 /* CurrencyConverter */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				62690F672D4A4624009CD8A4 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */,
+				62DF11112D50C73B00673AE2 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */,
 			);
 			path = CurrencyConverter;
 			sourceTree = "<group>";
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				62DF11132D50C76700673AE2 /* SnapKit in Frameworks */,
+				62DF11152D50C76700673AE2 /* SnapKit-Dynamic in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -125,6 +132,8 @@
 			);
 			name = CurrencyConverter;
 			packageProductDependencies = (
+				62DF11122D50C76700673AE2 /* SnapKit */,
+				62DF11142D50C76700673AE2 /* SnapKit-Dynamic */,
 			);
 			productName = CurrencyConverter;
 			productReference = 62690F3F2D4A4623009CD8A4 /* CurrencyConverter.app */;
@@ -294,7 +303,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z4MZ49A3CT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CurrencyConverter/Info.plist;
+				INFOPLIST_FILE = CurrencyConverter/ApplicationLayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -322,7 +331,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = Z4MZ49A3CT;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CurrencyConverter/Info.plist;
+				INFOPLIST_FILE = CurrencyConverter/ApplicationLayer/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -393,6 +402,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CurrencyConverter/ApplicationLayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -450,6 +460,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CurrencyConverter/ApplicationLayer/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.2;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
@@ -583,6 +594,19 @@
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		62DF11122D50C76700673AE2 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62DF110B2D50C32F00673AE2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		62DF11142D50C76700673AE2 /* SnapKit-Dynamic */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62DF110B2D50C32F00673AE2 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = "SnapKit-Dynamic";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 62690F372D4A4623009CD8A4 /* Project object */;
 }
