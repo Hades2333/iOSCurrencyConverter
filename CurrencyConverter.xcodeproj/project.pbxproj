@@ -33,7 +33,7 @@
 		62690F672D4A4624009CD8A4 /* Exceptions for "CurrencyConverter" folder in "CurrencyConverter" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				ApplicationLayer/Info.plist,
 			);
 			target = 62690F3E2D4A4623009CD8A4 /* CurrencyConverter */;
 		};
