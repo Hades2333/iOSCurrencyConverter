@@ -208,6 +208,9 @@
 			);
 			mainGroup = 62690F362D4A4623009CD8A4;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				62DF110B2D50C32F00673AE2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 62690F402D4A4623009CD8A4 /* Products */;
 			projectDirPath = "";
@@ -569,6 +572,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		62DF110B2D50C32F00673AE2 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
 	};
 	rootObject = 62690F372D4A4623009CD8A4 /* Project object */;
 }
