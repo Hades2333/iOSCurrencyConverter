@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		62DF11132D50C76700673AE2 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11122D50C76700673AE2 /* SnapKit */; };
 		62DF11152D50C76700673AE2 /* SnapKit-Dynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11142D50C76700673AE2 /* SnapKit-Dynamic */; };
+		62DF11EC2D50D90700673AE2 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 62DF11EB2D50D90700673AE2 /* KeychainAccess */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 			files = (
 				62DF11132D50C76700673AE2 /* SnapKit in Frameworks */,
 				62DF11152D50C76700673AE2 /* SnapKit-Dynamic in Frameworks */,
+				62DF11EC2D50D90700673AE2 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,6 +136,7 @@
 			packageProductDependencies = (
 				62DF11122D50C76700673AE2 /* SnapKit */,
 				62DF11142D50C76700673AE2 /* SnapKit-Dynamic */,
+				62DF11EB2D50D90700673AE2 /* KeychainAccess */,
 			);
 			productName = CurrencyConverter;
 			productReference = 62690F3F2D4A4623009CD8A4 /* CurrencyConverter.app */;
@@ -219,6 +222,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				62DF110B2D50C32F00673AE2 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				62DF11EA2D50D90700673AE2 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 62690F402D4A4623009CD8A4 /* Products */;
@@ -593,6 +597,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		62DF11EA2D50D90700673AE2 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -605,6 +617,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 62DF110B2D50C32F00673AE2 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = "SnapKit-Dynamic";
+		};
+		62DF11EB2D50D90700673AE2 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 62DF11EA2D50D90700673AE2 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
