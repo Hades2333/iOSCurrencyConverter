@@ -3,23 +3,22 @@
 <plist version="1.0">
 <dict>
 	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
 		<dict>
-			<key>NSAllowsArbitraryLoads</key>
-			<true/>
-
-			<key>NSExceptionDomains</key>
+			<key>api.evp.lt</key>
 			<dict>
-				<key>api.evp.lt</key>
-				<dict>
-					<key>NSIncludesSubdomains</key>
-					<true/>
-					<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
-					<true/>
-					<key>NSTemporaryExceptionMinimumTLSVersion</key>
-					<string>TLSv1.0</string>
-				</dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSTemporaryExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSTemporaryExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
 			</dict>
 		</dict>
+	</dict>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -32,7 +31,7 @@
 					<key>UISceneConfigurationName</key>
 					<string>Default Configuration</string>
 					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+					<string>CurrencyConverter.SceneDelegate</string>
 				</dict>
 			</array>
 		</dict>
