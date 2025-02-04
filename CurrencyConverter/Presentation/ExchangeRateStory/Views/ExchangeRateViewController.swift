@@ -10,6 +10,7 @@ import SnapKit
 import Combine
 import Metal
 import MetalKit
+
 enum ExchangeRateViewConstants {
     static let labelTitle = "Currency Converter"
     static let sourceTitle = "Source"
@@ -28,6 +29,9 @@ class ExchangeRateViewController: UIViewController {
     private let errorLabel = UILabel()
     
     private let gradientLayer = CAGradientLayer()
+    
+    private var coinView = CoinView()
+    
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = ExchangeRateViewConstants.labelTitle
@@ -85,43 +89,10 @@ class ExchangeRateViewController: UIViewController {
     }
     
     // MARK: - Lifecycle
-    var metalView: MTKView!
-    var renderer: CoinRenderer!
-    
-    /// Симуляция загрузки данных с сети, во время которой монета будет вращаться быстрее
-    func simulateNetworkLoad() {
-        renderer.isLoadingNetwork = true
-        // Например, загрузка длится 5 секунд
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.renderer.isLoadingNetwork = false
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bindViewModel()
-        
-        
-        
-        // Создаём устройство Metal
-        guard let device = MTLCreateSystemDefaultDevice() else {
-            fatalError("Устройство не поддерживает Metal")
-        }
-        
-        // Инициализируем MTKView
-        metalView = MTKView(frame: view.bounds, device: device)
-        metalView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        metalView.clearColor = MTLClearColorMake(0.1, 0.1, 0.1, 1.0)
-        view.addSubview(metalView)
-        
-        // Инициализируем рендерер
-        renderer = CoinRenderer(mtkView: metalView)
-        
-        // Симулируем сетевую загрузку
-        simulateNetworkLoad()
-        
-        
-        
         configureSubviews()
         addSubviews()
         makeConstraints()
@@ -181,11 +152,7 @@ class ExchangeRateViewController: UIViewController {
                 self?.errorLabel.text = String()
                 self?.errorLabel.isHidden = true
                 
-                if isLoading {
-                    self?.activityIndicator.startAnimating()
-                } else {
-                    self?.activityIndicator.stopAnimating()
-                }
+                self?.coinView.toggleState(isLoading: isLoading)
             }
             .store(in: &cancellables)
     }
@@ -194,12 +161,14 @@ class ExchangeRateViewController: UIViewController {
         setGradientBackground()
         targetCurrencyView.disableInput()
         view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action:#selector(tapDidTouch)))
+        coinView.backgroundColor = UIColor.clear
     }
     
     private func addSubviews() {
         view.addSubview(titleLabel)
         view.addSubview(stackView)
         view.addSubview(activityIndicator)
+        view.addSubview(coinView)
         
         stackView.addArrangedSubview(sourceCurrencyView)
         stackView.addArrangedSubview(borderView)
@@ -238,6 +207,12 @@ class ExchangeRateViewController: UIViewController {
             $0.width.lessThanOrEqualTo(388).priority(.required)
         }
         
+        coinView.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom).offset(100)
+            $0.centerX.equalToSuperview()
+            $0.width.equalToSuperview().multipliedBy(0.9)
+            $0.height.equalTo(coinView.snp.width)
+        }
     }
     
     private func setDefaultValues() async {
@@ -259,7 +234,7 @@ class ExchangeRateViewController: UIViewController {
     
     private func setGradientBackground() {
         
-        gradientLayer.colors = [UIColor.lightGray.cgColor, UIColor.white.cgColor]
+        gradientLayer.colors = [UIColor.black.cgColor, UIColor.white.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0, y: 1)
         gradientLayer.frame = view.bounds

@@ -56,7 +56,7 @@ class ExchangeRateViewModel: ObservableObject {
                 if Task.isCancelled { return }
                 
                 do {
-                    try await Task.sleep(nanoseconds: 1_000_000_000)
+                    try await Task.sleep(nanoseconds: 4_000_000_000)
                 } catch {
                     if Task.isCancelled { return }
                     Logger.exchangeRate.error("Sleep interrupted: \(error.localizedDescription)")

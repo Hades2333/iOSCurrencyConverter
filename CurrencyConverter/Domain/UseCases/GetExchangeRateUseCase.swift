@@ -17,6 +17,9 @@ class GetExchangeRateUseCase {
 
     func execute(fromAmount: Double, fromCurrency: String, toCurrency: String) async throws -> ExchangeRate {
         do {
+            
+            try await Task.sleep(nanoseconds: 2_000_000_000)
+            
             let exchangeRateDTO = try await repository.getCurrentRate(
                 fromAmount: fromAmount,
                 fromCurrency: fromCurrency,
