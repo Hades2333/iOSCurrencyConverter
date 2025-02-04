@@ -15,7 +15,7 @@ extension ExchangeRateEndpoint: Endpoint {
     var path: String {
         switch self {
         case .getExchangeRates(fromAmount: let fromAmount, fromCurrency: let fromCurrency, toCurrency: let toCurrency):
-            return "currency/commercial/exchange/\(fromAmount)-\(fromCurrency)/\(toCurrency)/latest"
+            return "/currency/commercial/exchange/\(fromAmount)-\(fromCurrency)/\(toCurrency)/latest"
         }
     }
 

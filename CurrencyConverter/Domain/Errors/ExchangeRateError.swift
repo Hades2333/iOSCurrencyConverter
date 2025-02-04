@@ -13,4 +13,5 @@ enum ExchangeRateError: Error {
     case serviceUnavailable
     case unknown
     case invalidData
+    case bundleMissing
 }

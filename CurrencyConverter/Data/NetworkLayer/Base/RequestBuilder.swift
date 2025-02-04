@@ -26,9 +26,10 @@ class RequestBuilder {
 
     private func makeUrl(from endpoint: Endpoint) throws -> URL {
         var components = URLComponents()
-        components.scheme = "https"
+        components.scheme = "http"
         components.host = "api.evp.lt"
         components.path = endpoint.path
+        
         guard let url = components.url else {
             throw APIError.invalidUrl
         }

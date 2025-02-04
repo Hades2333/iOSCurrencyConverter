@@ -28,8 +28,8 @@ class GetExchangeRateUseCase {
             Logger.exchangeRate.error("Mapping Error: \(error.localizedDescription)")
             
             throw ExchangeRateError.invalidData
-        } catch {
-            throw ExchangeRateError.unknown
+        } catch(let error) {
+            throw error
         }
     }
 }
