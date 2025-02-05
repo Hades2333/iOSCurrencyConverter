@@ -65,12 +65,6 @@ class ExchangeRateViewModel: ObservableObject {
         }
     }
     
-    // here
-//    func updateCurrencyValues(originExchangeRate: ExchangeRate, targetExchangeRate: ExchangeRate) {
-//        self.originExchangeRate = originExchangeRate
-//        self.targetExchangeRate = targetExchangeRate
-//    }
-    
     deinit {
         task?.cancel()
     }
@@ -78,10 +72,9 @@ class ExchangeRateViewModel: ObservableObject {
     // MARK: - Methods
     
     func fetchExchangeRate(fromAmount: Double, fromCurrency: CurrencyModel, toCurrency: CurrencyModel) async {
-        // here isLoading
         
-        saveData(fromCurrency: fromCurrency, toCurrency: toCurrency, amount: fromAmount
-        )
+        saveData(fromCurrency: fromCurrency, toCurrency: toCurrency, amount: fromAmount)
+        
         do {
             if Task.isCancelled { return }
                 
@@ -109,7 +102,6 @@ class ExchangeRateViewModel: ObservableObject {
         }
     }
     
-    // here to method above
     private func saveData(fromCurrency: CurrencyModel, toCurrency: CurrencyModel, amount: Double) {
         self.originExchangeRate = fromCurrency
         self.targetExchangeRate = toCurrency

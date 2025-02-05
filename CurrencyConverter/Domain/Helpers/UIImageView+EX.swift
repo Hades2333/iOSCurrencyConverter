@@ -7,11 +7,6 @@
 
 import UIKit
 
-// here
-//Task {
-//    await imageView.setFlagImage(by: "us")  // 🇺🇸 Loads US flag
-//}
-
 extension UIImageView {
     
     private static var imageCache = NSCache<NSString, UIImage>()

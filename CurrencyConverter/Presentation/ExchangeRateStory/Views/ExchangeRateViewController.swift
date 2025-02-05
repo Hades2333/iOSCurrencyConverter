@@ -19,6 +19,7 @@ enum ExchangeRateViewConstants {
     static let alertErrorTitle = "Error"
     static let alertButtonTitleOK = "OK"
     static let placeholderSearchCurrency = "Search currency"
+    static let statusLabelLoadingText = "Loading..."
 }
 
 class ExchangeRateViewController: UIViewController {
@@ -26,11 +27,16 @@ class ExchangeRateViewController: UIViewController {
     private var cancellables = Set<AnyCancellable>()
 
     private let exchangeRateLabel = UILabel()
-    private let errorLabel = UILabel()
-    
     private let gradientLayer = CAGradientLayer()
     
     private var coinView = CoinView()
+    
+    private lazy var statusLabel: LoadingLabel = {
+        let label = LoadingLabel()
+        label.font = UIFont.systemFont(ofSize: 31, weight: .semibold)
+        label.textAlignment = .center
+        return label
+    }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -38,13 +44,6 @@ class ExchangeRateViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 24, weight: .semibold)
         label.textColor = .darkGray
         return label
-    }()
-    
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .large)
-        indicator.color = .lightGray
-        indicator.hidesWhenStopped = true
-        return indicator
     }()
     
     private lazy var sourceCurrencyView: CurrencyView = {
@@ -123,16 +122,14 @@ class ExchangeRateViewController: UIViewController {
         viewModel.$targetExchangeRate
             .receive(on: DispatchQueue.main)
             .sink { [weak self] rate in
-                // here
-                self?.targetCurrencyView.setAmount(String(self!.viewModel.targetAmount ?? 0.0))
+                self?.targetCurrencyView.setAmount(String(self?.viewModel.targetAmount ?? 0.0))
             }
             .store(in: &cancellables)
         
         viewModel.$targetAmount
             .receive(on: DispatchQueue.main)
             .sink { [weak self] rate in
-                // here
-                self?.targetCurrencyView.setAmount(String(self!.viewModel.targetAmount ?? 0.0))
+                self?.targetCurrencyView.setAmount(String(self?.viewModel.targetAmount ?? 0.0))
             }
             .store(in: &cancellables)
         
@@ -140,8 +137,8 @@ class ExchangeRateViewController: UIViewController {
         viewModel.$errorMessage
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                self?.errorLabel.text = error
-                self?.errorLabel.isHidden = error == nil
+                self?.statusLabel.text = error
+                self?.statusLabel.isHidden = error == nil
             }
             .store(in: &cancellables)
         
@@ -149,9 +146,8 @@ class ExchangeRateViewController: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] isLoading in
                 
-                self?.errorLabel.text = String()
-                self?.errorLabel.isHidden = true
-                
+                self?.statusLabel.updateStateWith(isLoading)
+                self?.statusLabel.isHidden = !isLoading
                 self?.coinView.toggleState(isLoading: isLoading)
             }
             .store(in: &cancellables)
@@ -167,8 +163,8 @@ class ExchangeRateViewController: UIViewController {
     private func addSubviews() {
         view.addSubview(titleLabel)
         view.addSubview(stackView)
-        view.addSubview(activityIndicator)
         view.addSubview(coinView)
+        view.addSubview(statusLabel)
         
         stackView.addArrangedSubview(sourceCurrencyView)
         stackView.addArrangedSubview(borderView)
@@ -176,10 +172,6 @@ class ExchangeRateViewController: UIViewController {
     }
     
     private func makeConstraints() {
-        activityIndicator.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        
         titleLabel.snp.makeConstraints {
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
             $0.centerX.equalToSuperview()
@@ -205,6 +197,11 @@ class ExchangeRateViewController: UIViewController {
             $0.centerX.equalToSuperview()
             $0.left.right.equalToSuperview().inset(20).priority(.high)
             $0.width.lessThanOrEqualTo(388).priority(.required)
+        }
+        
+        statusLabel.snp.makeConstraints {
+            $0.top.equalTo(stackView.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
         }
         
         coinView.snp.makeConstraints {
@@ -233,7 +230,6 @@ class ExchangeRateViewController: UIViewController {
 
     
     private func setGradientBackground() {
-        
         gradientLayer.colors = [UIColor.black.cgColor, UIColor.white.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 0, y: 1)
