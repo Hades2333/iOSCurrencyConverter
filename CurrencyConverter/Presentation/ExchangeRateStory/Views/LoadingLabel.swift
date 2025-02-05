@@ -12,7 +12,7 @@ final class LoadingLabel: UILabel {
     private var loadingDotsState = 0
     private let baseText: String
 
-    init(baseText: String = "Загрузка") {
+    init(baseText: String = "Loading") {
         self.baseText = baseText
         super.init(frame: .zero)
         self.text = baseText

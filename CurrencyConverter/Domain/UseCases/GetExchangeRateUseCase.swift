@@ -10,7 +10,8 @@ import OSLog
 
 class GetExchangeRateUseCase {
     private let repository: ExchangeRateRepository
-
+    private let maxAmount: Double = 100_000_000
+    
     init(repository: ExchangeRateRepository) {
         self.repository = repository
     }
@@ -19,6 +20,10 @@ class GetExchangeRateUseCase {
         do {
             
             try await Task.sleep(nanoseconds: 2_000_000_000)
+            
+            guard fromAmount <= maxAmount else {
+                throw ExchangeRateError.amountTooLarge
+            }
             
             let exchangeRateDTO = try await repository.getCurrentRate(
                 fromAmount: fromAmount,

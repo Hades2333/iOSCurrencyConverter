@@ -15,9 +15,6 @@ enum ExchangeRateViewConstants {
     static let labelTitle = "Currency Converter"
     static let sourceTitle = "Source"
     static let targetTitle = "Source"
-    
-    static let alertErrorTitle = "Error"
-    static let alertButtonTitleOK = "OK"
     static let placeholderSearchCurrency = "Search currency"
     static let statusLabelLoadingText = "Loading..."
 }
@@ -108,7 +105,7 @@ class ExchangeRateViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.startUpdatingExchangeRate()
+        viewModel.startUpdatingExchangeRateIfNeeded()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -132,13 +129,11 @@ class ExchangeRateViewController: UIViewController {
                 self?.targetCurrencyView.setAmount(String(self?.viewModel.targetAmount ?? 0.0))
             }
             .store(in: &cancellables)
-        
 
         viewModel.$errorMessage
             .receive(on: DispatchQueue.main)
             .sink { [weak self] error in
-                self?.statusLabel.text = error
-                self?.statusLabel.isHidden = error == nil
+                self?.showAlert(message: error)
             }
             .store(in: &cancellables)
         

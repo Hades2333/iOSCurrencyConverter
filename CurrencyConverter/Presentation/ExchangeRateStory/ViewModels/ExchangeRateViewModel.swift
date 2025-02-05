@@ -42,7 +42,7 @@ class ExchangeRateViewModel: ObservableObject {
         self.amount = fetchAmount()
     }
     
-    func startUpdatingExchangeRate() {
+    func startUpdatingExchangeRateIfNeeded() {
         guard task == nil else { return }
 
         task = Task {
@@ -91,13 +91,15 @@ class ExchangeRateViewModel: ObservableObject {
                 self.errorMessage = nil
                 
                 isLoading = false
+                
+                startUpdatingExchangeRateIfNeeded()
             }
-            
         } catch {
             if Task.isCancelled { return }
             
             await MainActor.run {
                 self.errorMessage = "An error occurred: \(error.localizedDescription)"
+                cancelUpdateTask()
             }
         }
     }
@@ -132,6 +134,7 @@ class ExchangeRateViewModel: ObservableObject {
     }
     
     func cancelUpdateTask() {
+        isLoading = false
         task?.cancel()
         task = nil
     }
