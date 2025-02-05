@@ -14,7 +14,7 @@ import MetalKit
 enum ExchangeRateViewConstants {
     static let labelTitle = "Currency Converter"
     static let sourceTitle = "Source"
-    static let targetTitle = "Source"
+    static let targetTitle = "Target"
     static let placeholderSearchCurrency = "Search currency"
     static let statusLabelLoadingText = "Loading..."
 }
@@ -25,6 +25,8 @@ class ExchangeRateViewController: UIViewController {
 
     private let exchangeRateLabel = UILabel()
     private let gradientLayer = CAGradientLayer()
+    private let scrollView = UIScrollView()
+    private let contentView = UIView()
     
     private var coinView = CoinView()
     
@@ -66,7 +68,9 @@ class ExchangeRateViewController: UIViewController {
     private lazy var stackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .fill
+        stackView.alignment = .center
+        stackView.distribution = .fillProportionally
+        stackView.spacing = 5
         stackView.backgroundColor = .white
         stackView.layer.cornerRadius = 20
         stackView.clipsToBounds = true
@@ -156,10 +160,13 @@ class ExchangeRateViewController: UIViewController {
     }
     
     private func addSubviews() {
-        view.addSubview(titleLabel)
-        view.addSubview(stackView)
-        view.addSubview(coinView)
-        view.addSubview(statusLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(titleLabel)
+        contentView.addSubview(stackView)
+        contentView.addSubview(coinView)
+        contentView.addSubview(statusLabel)
         
         stackView.addArrangedSubview(sourceCurrencyView)
         stackView.addArrangedSubview(borderView)
@@ -167,43 +174,45 @@ class ExchangeRateViewController: UIViewController {
     }
     
     private func makeConstraints() {
+//        sourceCurrencyView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        stackView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        stackView.setContentHuggingPriority(.defaultLow, for: .horizontal)
+
+        
+        scrollView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+
+        contentView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+            $0.width.equalToSuperview()
+            $0.height.greaterThanOrEqualToSuperview()
+        }
+
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(20)
+            $0.top.equalTo(contentView.safeAreaLayoutGuide.snp.top).offset(20)
             $0.centerX.equalToSuperview()
         }
-        
-        sourceCurrencyView.backgroundColor = .white
-        
-        sourceCurrencyView.snp.makeConstraints {
-            $0.height.equalTo(120)
-        }
-        
-        borderView.snp.makeConstraints {
-            $0.width.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-        
-        targetCurrencyView.snp.makeConstraints {
-            $0.height.equalTo(120)
-        }
-        
+
         stackView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(40)
             $0.centerX.equalToSuperview()
-            $0.left.right.equalToSuperview().inset(20).priority(.high)
-            $0.width.lessThanOrEqualTo(388).priority(.required)
+            $0.left.right.lessThanOrEqualToSuperview().inset(25).priority(.high)
+            $0.width.lessThanOrEqualTo(500).priority(.required)
+            $0.height.greaterThanOrEqualTo(200).priority(.required)
         }
-        
+
         statusLabel.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom).offset(30)
             $0.centerX.equalToSuperview()
         }
-        
+
         coinView.snp.makeConstraints {
             $0.top.equalTo(stackView.snp.bottom).offset(100)
             $0.centerX.equalToSuperview()
             $0.width.equalToSuperview().multipliedBy(0.9)
             $0.height.equalTo(coinView.snp.width)
+            $0.bottom.equalToSuperview().offset(-20)
         }
     }
     

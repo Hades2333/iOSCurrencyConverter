@@ -36,6 +36,9 @@ class GetExchangeRateUseCase {
             Logger.exchangeRate.error("Mapping Error: \(error.localizedDescription)")
             
             throw ExchangeRateError.invalidData
+        } catch let error as APIError {
+            Logger.exchangeRate.error("API Error: \(error.localizedDescription) (code: \((error as NSError).code))")
+            throw ExchangeRateError.invalidCurrencyCode
         } catch(let error) {
             throw error
         }

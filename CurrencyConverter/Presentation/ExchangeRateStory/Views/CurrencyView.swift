@@ -93,10 +93,15 @@ class CurrencyView: UIView {
         addSubview(dropdownImageView)
     }
     
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: 300, height: 80)
+    }
+    
     private func makeConstraints() {
+        
         titleLabel.snp.makeConstraints {
             $0.left.equalTo(20)
-            $0.top.equalTo(20)
+            $0.top.equalTo(10)
         }
         
         currencyImageView.snp.makeConstraints {

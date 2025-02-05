@@ -13,6 +13,7 @@ enum ExchangeRateError: Error, LocalizedError {
     case serviceUnavailable
     case unknown
     case invalidData
+    case invalidCurrencyCode
     case bundleMissing
     case amountTooLarge
 
@@ -32,6 +33,8 @@ enum ExchangeRateError: Error, LocalizedError {
             return NSLocalizedString("Required resource bundle is missing.", comment: "")
         case .amountTooLarge:
             return NSLocalizedString("The entered amount is too large to process.", comment: "")
+        case .invalidCurrencyCode:
+            return NSLocalizedString("Sorry, right now we are not handling this currency code.", comment: "")
         }
     }
 }
